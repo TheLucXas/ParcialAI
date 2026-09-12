@@ -119,6 +119,119 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &29607105
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368770232749988265, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: m_Name
+      value: Referee
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _patrolData.waypoints.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1905223003}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 740288917}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2038803036}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1467118762}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 387152380}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1828302415}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[6]'
+      value: 
+      objectReference: {fileID: 979891182}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[7]'
+      value: 
+      objectReference: {fileID: 748346501}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[8]'
+      value: 
+      objectReference: {fileID: 2047278948}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[9]'
+      value: 
+      objectReference: {fileID: 1475125643}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[10]'
+      value: 
+      objectReference: {fileID: 395265233}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[11]'
+      value: 
+      objectReference: {fileID: 1471121287}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: '_patrolData.waypoints.Array.data[12]'
+      value: 
+      objectReference: {fileID: 756396422}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 814955b7c33960342a025540ad3d382d, type: 3}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &395265232
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,138 +635,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &443428618
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 443428622}
-  - component: {fileID: 443428621}
-  - component: {fileID: 443428620}
-  - component: {fileID: 443428619}
-  - component: {fileID: 443428623}
-  m_Layer: 0
-  m_Name: Referee
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!136 &443428619
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443428618}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &443428620
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443428618}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &443428621
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443428618}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &443428622
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443428618}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.39177, y: 0, z: 0.40749}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &443428623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443428618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b65b2f7f7f4097498d27c7543fc12b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FSMAgent
-  _speed: 13
-  _patrolData:
-    waypoints: []
-    transform: {fileID: 443428622}
-    waypointCheckDistance: 0.5
 --- !u!1 &740288916
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &748346500
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &756396421
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,6 +867,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
+--- !u!1001 &1397560672
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3462546160250400152, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
 --- !u!1 &1467118761
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,6 +970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &1471121286
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +1016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &1475125642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &1828302414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &1896444178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &2038803035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,6 +1244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1 &2047278947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,6 +1290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
+  _hideGizmosOnPlay: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1248,5 +1299,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 338665603}
-  - {fileID: 443428622}
   - {fileID: 1896444179}
+  - {fileID: 1397560672}
+  - {fileID: 29607105}
