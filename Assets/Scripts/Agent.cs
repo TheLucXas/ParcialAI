@@ -69,13 +69,7 @@ public class Agent : MonoBehaviour
         _velocity += CalculateSeparation(_allAgents, _separationRadius) * _separationWeight
                     + CalculateAlignment(_allAgents, _viewRadius) * _alignmentWeight
                     + CalculateCohesion(_allAgents, _viewRadius) * _cohesionWeight;
-        //ApplyForce(CalculateAlignment(_allAgents, _viewRadius));
-
-        //Leader Following
-        //Arrive(Lider) + Separation()
     }
-
-    private void ApplyForce(Vector3 force) => _velocity = Vector3.ClampMagnitude(_velocity + force, _maxSpeed);
 
     private Vector3 CalculateCohesion(IEnumerable<Agent> agents, float radius)
     {
@@ -149,7 +143,6 @@ public class Agent : MonoBehaviour
     private Vector3 CalculatePursuit(Agent target) => CalculateSeek(GetFuturePosition(target));
     private Vector3 CalculateEvade(Agent target) => CalculateFlee(GetFuturePosition(target));
 
-    //FuturePosition = Position + Velocity * Time;
     private Vector3 GetFuturePosition(Agent target)
     {
         float distanceToTarget = (target.transform.position - transform.position).magnitude;
@@ -225,7 +218,6 @@ public class Agent : MonoBehaviour
             Agent target = targetAgent;
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
             float predictedTime = distanceToTarget / (_maxSpeed + target.Velocity.magnitude);
-            //FuturePosition = Position + Velocity * Time;
             Vector3 futurePos = target.transform.position + target.Velocity * predictedTime;
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(futurePos, 0.25f);

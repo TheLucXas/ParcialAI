@@ -4,9 +4,9 @@ public class Bounds : MonoBehaviour
 {
     public static Bounds Instance { get; private set; }
     [SerializeField]
-    private float _height = 68f;
+    private float _height = 34f;
     [SerializeField]
-    private float _width = 105f;
+    private float _width = 52.2f;
     [SerializeField]
     private bool _drawGizmos;
 
