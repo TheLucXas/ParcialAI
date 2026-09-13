@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4021515383455754432}
   - component: {fileID: 310931823347752373}
   - component: {fileID: 6761140441652180538}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -127,14 +127,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b66e156f9c3cc648bedb5dd22837906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Agent
+  _maxHealth: 2
+  _respawnTime: 6
   _maxSpeed: 15
   _maxForce: 10
-  _viewRadius: 5
+  _viewRadius: 7
   _currentMode: 5
   _arriveRadius: 3
-  _separationRadius: 3
-  _separationWeight: 1.13
-  _cohesionWeight: 0.58
-  _alignmentWeight: 1.75
+  _gizmosFlockingColor: {r: 0.627451, g: 0.1254902, b: 0.9411765, a: 1}
+  _separationRadius: 3.5
+  _separationWeight: 1.33
+  _cohesionWeight: 0.61
+  _alignmentWeight: 1.51
   target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
   targetAgent: {fileID: 0}

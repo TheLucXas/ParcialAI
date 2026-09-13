@@ -1,12 +1,16 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Agent : MonoBehaviour
 {
     private enum SteeringModes { Seek, Flee, Arrive, Pursuit, Evade, Flocking }
 
     [Header("Stats")]
+    [SerializeField] private float _maxHealth = 2.0f;
+    [SerializeField] private float _respawnTime = 6.0f;
+    private float _currentHealth;
+    private bool _isDead = false;
     [SerializeField]
     private float _maxSpeed = 5f;
     [SerializeField]
@@ -39,10 +43,12 @@ public class Agent : MonoBehaviour
 
     private Vector3 _velocity;
     public Vector3 Velocity => _velocity;
+    public bool IsDead => _isDead;
 
     private void Awake()
     {
         _allAgents.Add(this);
+        _currentHealth = _maxHealth;
     }
 
     private void Start()
@@ -53,14 +59,53 @@ public class Agent : MonoBehaviour
 
     private void Update()
     {
+        if (_isDead) return;
+
         if (_currentMode == SteeringModes.Flocking) CalculateFlocking();
         else if (_currentMode == SteeringModes.Pursuit) _velocity += CalculatePursuit(targetAgent);
         else if (_currentMode == SteeringModes.Evade) _velocity += CalculateEvade(targetAgent);
         else _velocity += GetCurrentSteeringMode();
 
+        _velocity.y = 0f;
         transform.position += _velocity * Time.deltaTime;
-        transform.forward = _velocity;
+        if (_velocity.sqrMagnitude > 0.0001f) transform.forward = _velocity;
         transform.position = Bounds.Instance.CalculateBoundPosition(transform.position);
+    }
+
+    public void TakeDamage(float amount)
+    {
+        if (_isDead) return;
+
+        _currentHealth -= amount;
+
+        if (_currentHealth <= 0f)
+        {
+            _currentHealth = 0f;
+            _isDead = true;
+            _velocity = Vector3.zero;
+            gameObject.layer = LayerMask.NameToLayer("Gather");
+            StartCoroutine(WaitToRespawn());
+        }
+    }
+
+    private IEnumerator WaitToRespawn()
+    {
+        yield return new WaitForSeconds(_respawnTime);
+        Respawn();
+
+    }
+
+    public void Respawn()
+    {
+        transform.position = Bounds.Instance.GetRandomPointInBounds();
+        _currentHealth = _maxHealth;
+        _isDead = false;
+        AgentVisibility(true);
+    }
+
+    public void AgentVisibility(bool visible)
+    {
+        gameObject.SetActive(visible);
     }
 
     #region Steering Behaviors
@@ -114,7 +159,7 @@ public class Agent : MonoBehaviour
 
         desired /= count;
 
-        return CalculateSteering(-desired.normalized * _maxSpeed);
+        return SteeringUtils.CalculateSteering(_velocity, -desired.normalized * _maxSpeed, _maxForce);
     }
 
 
@@ -135,50 +180,26 @@ public class Agent : MonoBehaviour
         if (count == 0) return Vector3.zero;
         desired /= count;
 
-        return CalculateSteering(desired.normalized * _maxSpeed);
+        return SteeringUtils.CalculateSteering(_velocity, desired.normalized * _maxSpeed, _maxForce);
     }
 
     private bool InRange(Vector3 position, float radius) => (position - transform.position).sqrMagnitude <= radius * radius;
 
     #endregion
 
-    private Vector3 CalculatePursuit(Agent target) => CalculateSeek(GetFuturePosition(target));
-    private Vector3 CalculateEvade(Agent target) => CalculateFlee(GetFuturePosition(target));
+    private Vector3 CalculatePursuit(Agent target) =>
+        SteeringUtils.CalculatePursuit(transform.position, _velocity, _maxSpeed, _maxForce, target.transform.position, target.Velocity);
+    private Vector3 CalculateEvade(Agent target) =>
+         SteeringUtils.CalculateEvade(transform.position, _velocity, _maxSpeed, _maxForce, target.transform.position, target.Velocity);
 
-    private Vector3 GetFuturePosition(Agent target)
-    {
-        float distanceToTarget = (target.transform.position - transform.position).magnitude;
-        float predictedTime = distanceToTarget / (_maxSpeed + target.Velocity.magnitude);
-        return target.transform.position + target.Velocity * predictedTime;
-    }
+    private Vector3 CalculateSeek(Vector3 targetPosition) =>
+        SteeringUtils.CalculateSeek(transform.position, _velocity, targetPosition, _maxSpeed, _maxForce);
 
-    private Vector3 CalculateSeek(Vector3 targetPosition)
-    {
-        Vector3 desired = (targetPosition - transform.position).normalized * _maxSpeed;
-        return CalculateSteering(desired);
-    }
+    private Vector3 CalculateFlee(Vector3 targetPosition) =>
+        SteeringUtils.CalculateFlee(transform.position, _velocity, targetPosition, _maxSpeed, _maxForce);
 
-    private Vector3 CalculateFlee(Vector3 targetPosition)
-    {
-        Vector3 desired = (targetPosition - transform.position).normalized * _maxSpeed;
-        return CalculateSteering(-desired);
-    }
-
-    private Vector3 CalculateArrive(Vector3 targetPosition)
-    {
-        Vector3 dir = (targetPosition - transform.position);
-        float speed = _maxSpeed;
-        float distance = dir.magnitude;
-
-        if (distance <= _arriveRadius)
-        {
-            float percentDistance = distance / _arriveRadius;
-            speed *= percentDistance;
-        }
-
-        Vector3 desired = dir.normalized * speed;
-        return CalculateSteering(desired);
-    }
+    private Vector3 CalculateArrive(Vector3 targetPosition) =>
+        SteeringUtils.CalculateArrive(transform.position, _velocity, targetPosition, _maxSpeed, _maxForce, _arriveRadius);
 
     #endregion
 
@@ -193,13 +214,6 @@ public class Agent : MonoBehaviour
             SteeringModes.Arrive => CalculateArrive(targetPosition),
             _ => Vector3.zero,
         };
-    }
-
-    private Vector3 CalculateSteering(Vector3 desired)
-    {
-        Vector3 steering = desired - _velocity;
-        steering = Vector3.ClampMagnitude(steering, _maxForce);
-        return steering * Time.deltaTime;
     }
     #endregion
 

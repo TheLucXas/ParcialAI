@@ -176,8 +176,40 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6929031791263216776, guid: 46a145ff53f55394d8ff3b99934df71f, type: 3}
     - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _patrolData.speed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _attackData.ChaseForce
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _attackData.ChaseSpeed
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _patrolData.detectionRadius
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _patrolData.boidLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _attackData.MeleeAttackRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _attackData.RangeAttackRadius
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: _patrolData.waypoints.Array.size
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _patrolData.waypointCheckDistance
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: '_patrolData.waypoints.Array.data[0]'
@@ -658,7 +690,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1 &395265232
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,7 +736,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1001 &404514162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1178,7 +1208,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1 &748346500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1254,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1 &756396421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,7 +1300,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1554,7 +1581,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1001 &1122169709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1782,7 +1808,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1 &1471121286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,7 +1854,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1 &1475125642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,7 +1900,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1001 &1480393600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2171,7 +2194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1 &1896444178
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,7 +2284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1001 &2004043191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2495,7 +2516,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1 &2047278947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2542,7 +2562,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
   _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
-  _hideGizmosOnPlay: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

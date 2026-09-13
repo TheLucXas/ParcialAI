@@ -24,10 +24,17 @@ public class Bounds : MonoBehaviour
         if (position.x < -_width / 2f) newPosition.x = _width / 2f;
         if (position.z > _height / 2f) newPosition.z = -_height / 2f;
         if (position.z < -_height / 2f) newPosition.z = _height / 2f;
+        newPosition.y = 0f;
 
         return newPosition;
     }
 
+    public Vector3 GetRandomPointInBounds()
+    {
+        float x = Random.Range(-_width / 2f, _width / 2f);
+        float z = Random.Range(-_height / 2f, _height / 2f);
+        return new Vector3(x, 0f, z);
+    }
 
     private void OnDrawGizmos()
     {

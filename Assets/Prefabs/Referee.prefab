@@ -107,7 +107,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -127,8 +127,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b65b2f7f7f4097498d27c7543fc12b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FSMAgent
-  _speed: 13
   _patrolData:
     waypoints: []
     transform: {fileID: 371149759109899038}
-    waypointCheckDistance: 0.1
+    ball: {fileID: 0}
+    waypointCheckDistance: 0.75
+    speed: 13
+    steerForce: 10
+    detectionRadius: 8
+    minBallSpawnTime: 3
+    maxBallSpawnTime: 9
+    maxBallsCount: 5
+    boidLayer:
+      serializedVersion: 2
+      m_Bits: 0
+  _attackData:
+    AttackDamage: 1
+    MeleeAttackRadius: 3
+    RangeAttackRadius: 6
+    TimeBetweenAttacks: 5
+    ChaseSpeed: 14
+    ChaseForce: 14
+  _drawGizmos: 1
+  _meleeGizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  _rangeGizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _radiusGizmoColor: {r: 0, g: 1, b: 0, a: 1}
