@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Agent : MonoBehaviour
@@ -8,6 +9,8 @@ public class Agent : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private float _maxHealth = 2.0f;
+    [SerializeField] private float _attackDamage = 0.25f;
+    [SerializeField] private float _attackCooldown = 0.5f;
     [SerializeField] private float _respawnTime = 6.0f;
     private float _currentHealth;
     private bool _isDead = false;
@@ -23,6 +26,12 @@ public class Agent : MonoBehaviour
     private float _arriveRadius = 3f;
     private LayerMask _originalMask;
     [SerializeField] private Color _gizmosFlockingColor = Color.purple;
+    [SerializeField] private LayerMask _rewardLayer;
+    [SerializeField] private LayerMask _hunterLayer;
+
+    [Header("Evade Stats")]
+    [SerializeField] private float _evadeSpeed = 8f;
+    [SerializeField] private float _evadeForce = 15f;
 
     [Header("Flocking values")]
     [SerializeField]
@@ -41,12 +50,15 @@ public class Agent : MonoBehaviour
     private Agent targetAgent;
 
     private static readonly List<Agent> _allAgents = new();
+    private readonly Collider[] _detectionBuffer = new Collider[1];
+    private readonly Collider[] _hunterBuffer = new Collider[1];
 
     [Header("Visual Feedback")]
     [SerializeField] private MeshRenderer _meshRenderer;
     private Color _originalColor;
     private Coroutine _damageFlashCoroutine;
 
+    private float _timer;
     private Vector3 _velocity;
     public Vector3 Velocity => _velocity;
     public bool IsDead => _isDead;
@@ -64,21 +76,73 @@ public class Agent : MonoBehaviour
     {
         Vector3 randomVector = new(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
         _velocity += randomVector.normalized * _maxSpeed;
+        _timer = _attackCooldown;
     }
 
     private void Update()
     {
         if (_isDead) return;
 
-        if (_currentMode == SteeringModes.Flocking) CalculateFlocking();
-        else if (_currentMode == SteeringModes.Pursuit) _velocity += CalculatePursuit(targetAgent);
-        else if (_currentMode == SteeringModes.Evade) _velocity += CalculateEvade(targetAgent);
-        else _velocity += GetCurrentSteeringMode();
+        Vector3 steeringForce = Vector3.zero;
 
+        int hunterHitCount = Physics.OverlapSphereNonAlloc(transform.position, _viewRadius, _hunterBuffer, _hunterLayer);
+        int rewardHitCount = Physics.OverlapSphereNonAlloc(transform.position, _viewRadius, _detectionBuffer, _rewardLayer);
+
+        if (hunterHitCount > 0 && _hunterBuffer[0].TryGetComponent<FSMAgent>(out var hunter))
+        {
+            steeringForce += SteeringUtils.CalculateEvade(
+                transform.position,
+                _velocity,
+                _evadeSpeed,
+                _evadeForce,
+                hunter.transform.position,
+                hunter.CurrentVelocity
+            );
+        }
+        else if (rewardHitCount > 0)
+        {
+
+            Vector3 ballPosition = _detectionBuffer[0].transform.position;
+            Vector3 flatBallPos = new Vector3(ballPosition.x, 0f, ballPosition.z);
+
+            steeringForce += CalculateArrive(flatBallPos);
+
+            steeringForce += CalculateSeparation(_allAgents, _separationRadius) * _separationWeight;
+
+            if (Vector3.Distance(transform.position, ballPosition) <= _arriveRadius)
+            {
+                if (_timer >= _attackCooldown)
+                {
+                    StartCoroutine(AttackCorutine(_detectionBuffer[0].gameObject));
+                    _velocity = Vector3.zero;
+                    return;
+                }
+                else _timer -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            steeringForce += CalculateFlocking();
+        }
+
+        _velocity += steeringForce;
         _velocity.y = 0f;
+
         transform.position += _velocity * Time.deltaTime;
-        if (_velocity.sqrMagnitude > 0.0001f) transform.forward = _velocity;
+
+        if (_velocity.sqrMagnitude > 0.0001f)
+        {
+            transform.forward = _velocity.normalized;
+        }
+
         transform.position = Bounds.Instance.CalculateBoundPosition(transform.position);
+    }
+
+    IEnumerator AttackCorutine(GameObject target)
+    {
+        target.GetComponent<Ball>().TakeDamage(_attackDamage);
+        yield return new WaitForSeconds(_attackCooldown);
+        _timer = _attackCooldown;
     }
 
     public void TakeDamage(float amount)
@@ -152,11 +216,11 @@ public class Agent : MonoBehaviour
     #region Steering Behaviors
 
     #region Flocking
-    private void CalculateFlocking()
+    private Vector3 CalculateFlocking()
     {
-        _velocity += CalculateSeparation(_allAgents, _separationRadius) * _separationWeight
-                    + CalculateAlignment(_allAgents, _viewRadius) * _alignmentWeight
-                    + CalculateCohesion(_allAgents, _viewRadius) * _cohesionWeight;
+        return CalculateSeparation(_allAgents, _separationRadius) * _separationWeight
+             + CalculateAlignment(_allAgents, _viewRadius) * _alignmentWeight
+             + CalculateCohesion(_allAgents, _viewRadius) * _cohesionWeight;
     }
 
     private Vector3 CalculateCohesion(IEnumerable<Agent> agents, float radius)
@@ -265,33 +329,12 @@ public class Agent : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (_currentMode == SteeringModes.Arrive)
-        {
-            Gizmos.color = Color.red;
-            var pos = new Vector3(target.position.x, 0f, target.position.z);
-            GizmosUtils.DrawGizmosCircle(pos, Vector3.up, _arriveRadius);
-        }
-        else if (_currentMode == SteeringModes.Pursuit)
-        {
-            Agent target = targetAgent;
-            float distanceToTarget = (target.transform.position - transform.position).magnitude;
-            float predictedTime = distanceToTarget / (_maxSpeed + target.Velocity.magnitude);
-            Vector3 futurePos = target.transform.position + target.Velocity * predictedTime;
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(futurePos, 0.25f);
-            Gizmos.DrawLine(targetAgent.transform.position, futurePos);
-        }
-        else if (_currentMode == SteeringModes.Flocking)
-        {
-            Gizmos.color = _gizmosFlockingColor;
-            var pos = new Vector3(transform.position.x, 0f, transform.position.z);
-            GizmosUtils.DrawGizmosCircle(pos, Vector3.up, _separationRadius);
-        }
-        else
-        {
-            Gizmos.color = Color.white;
-            Gizmos.DrawWireSphere(transform.position, _viewRadius);
-        }
+        Vector3 pos2D = new Vector3(transform.position.x, 0f, transform.position.z);
 
+        Gizmos.color = Color.white;
+        GizmosUtils.DrawGizmosCircle(pos2D, Vector3.up, _viewRadius);
+
+        Gizmos.color = _gizmosFlockingColor;
+        GizmosUtils.DrawGizmosCircle(pos2D, Vector3.up, _separationRadius);
     }
 }

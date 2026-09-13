@@ -32,14 +32,15 @@ public class GatherState : State
             return;
         }
 
+        if (!_targetAgent.IsDead)
+        {
+            _agent.FSM.ChangeState(_agent.Patrol);
+            return;
+        }
+
         if (_isGathering && _timer < _data.GatherTime)
         {
             _timer += Time.deltaTime;
-            if (!_targetAgent.IsDead)
-            {
-                _agent.FSM.ChangeState(_agent.Patrol);
-                return;
-            }
             return;
         }
         else if (_timer >= _data.GatherTime)

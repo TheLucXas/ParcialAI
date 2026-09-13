@@ -133,8 +133,16 @@ MonoBehaviour:
   _maxForce: 10
   _viewRadius: 7
   _currentMode: 5
-  _arriveRadius: 3
+  _arriveRadius: 1.25
   _gizmosFlockingColor: {r: 0.627451, g: 0.1254902, b: 0.9411765, a: 1}
+  _rewardLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _hunterLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _evadeSpeed: 17
+  _evadeForce: 18
   _separationRadius: 3.5
   _separationWeight: 1.33
   _cohesionWeight: 0.61

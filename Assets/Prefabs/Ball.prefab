@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6385641269223495264}
   - component: {fileID: 7066814207484857040}
   - component: {fileID: 5073397668723621690}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,3 +125,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ca19e6219e23d448f67efccb167405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ball
+  _drawGizmos: 1
+  _gizmosColor: {r: 1, g: 0.7529413, b: 0.7960785, a: 1}

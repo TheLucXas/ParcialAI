@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7555120359159450790}
   - component: {fileID: 6245893442095369228}
   - component: {fileID: 8115026315290038201}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Referee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,10 +135,13 @@ MonoBehaviour:
     speed: 13
     steerForce: 10
     detectionRadius: 8
-    minBallSpawnTime: 3
-    maxBallSpawnTime: 9
+    minBallSpawnTime: 1.5
+    maxBallSpawnTime: 4.5
     maxBallsCount: 5
     boidLayer:
+      serializedVersion: 2
+      m_Bits: 0
+    gatherLayer:
       serializedVersion: 2
       m_Bits: 0
   _attackData:
@@ -150,6 +153,12 @@ MonoBehaviour:
     ChaseForce: 14
     RangedAttackDelay: 1.5
     ProjectilePrefab: {fileID: 2395138093892445455, guid: 2e5946f064e91b94395abfdf41bb0586, type: 3}
+  _gatherData:
+    GatherTime: 3
+    Speed: 13
+    SteerForce: 10
+    ArriveRadius: 1
+    GatherCheckDistance: 1.25
   _drawGizmos: 1
   _meleeGizmoColor: {r: 1, g: 0, b: 0, a: 1}
   _rangeGizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

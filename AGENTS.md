@@ -4,5 +4,5 @@
 - Active game object:
   - Name: Referee
   - Tag: Untagged
-  - Layer: Default
+  - Layer: Referee
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
