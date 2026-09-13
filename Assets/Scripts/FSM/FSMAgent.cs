@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class FSMAgent : MonoBehaviour
 {
     [SerializeField] private PatrolData _patrolData;
+    [SerializeField] private AttackData _attackData;
+    [SerializeField] private bool _drawGizmos = true;
+    [SerializeField] private Color _meleeGizmoColor = Color.red;
+    [SerializeField] private Color _rangeGizmoColor = Color.yellow;
+
 
     private readonly FiniteStateMachine _fsm = new();
     public FiniteStateMachine FSM => _fsm;
@@ -17,6 +23,7 @@ public class FSMAgent : MonoBehaviour
     {
         Idle = new(this);
         Patrol = new(_patrolData, this);
+        Attack = new(_attackData, this);
         _fsm.AddState(Idle);
         _fsm.AddState(Patrol);
         _fsm.AddState(Attack);
@@ -27,5 +34,17 @@ public class FSMAgent : MonoBehaviour
         _fsm.Update();
     }
 
+    private void OnDrawGizmos()
+    {
+        if (_drawGizmos)
+        {
+            var pos = new Vector3(transform.position.x, 0f, transform.position.z);
+            Gizmos.color = _meleeGizmoColor;
+            GizmosUtils.DrawGizmosCircle(pos, Vector3.up, _attackData.MeleeAttackRadius);
+
+            Gizmos.color = _rangeGizmoColor;
+            GizmosUtils.DrawGizmosCircle(pos, Vector3.up, _attackData.RangeAttackRadius);
+        }
+    }
 
 }

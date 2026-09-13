@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Agent : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Agent : MonoBehaviour
     private SteeringModes _currentMode;
     [SerializeField]
     private float _arriveRadius = 3f;
+    [SerializeField] private Color _gizmosFlockingColor = Color.purple;
 
     [Header("Flocking values")]
     [SerializeField]
@@ -211,7 +213,8 @@ public class Agent : MonoBehaviour
         if (_currentMode == SteeringModes.Arrive)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(target.position, _arriveRadius);
+            var pos = new Vector3(target.position.x, 0f, target.position.z);
+            GizmosUtils.DrawGizmosCircle(pos, Vector3.up, _arriveRadius);
         }
         else if (_currentMode == SteeringModes.Pursuit)
         {
@@ -225,8 +228,9 @@ public class Agent : MonoBehaviour
         }
         else if (_currentMode == SteeringModes.Flocking)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _separationRadius);
+            Gizmos.color = _gizmosFlockingColor;
+            var pos = new Vector3(transform.position.x, 0f, transform.position.z);
+            GizmosUtils.DrawGizmosCircle(pos, Vector3.up, _separationRadius);
         }
         else
         {

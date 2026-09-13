@@ -7,8 +7,8 @@ public class Bounds : MonoBehaviour
     private float _height = 34f;
     [SerializeField]
     private float _width = 52.2f;
-    [SerializeField]
-    private bool _drawGizmos;
+    [SerializeField] private bool _drawGizmos;
+    [SerializeField] private Color _gizmosColor = Color.white;
 
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class Bounds : MonoBehaviour
     {
         if (!_drawGizmos) return;
 
-        Gizmos.color = Color.cyan;
+        Gizmos.color = _gizmosColor;
         Gizmos.DrawWireCube(Vector3.zero, new Vector3(_width, 0f, _height));
     }
 

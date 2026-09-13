@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -254,7 +254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -316,7 +316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -378,7 +378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -611,6 +611,7 @@ MonoBehaviour:
   _height: 34
   _width: 52.2
   _drawGizmos: 1
+  _gizmosColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &387152379
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +657,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1 &395265232
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1001 &404514162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -721,7 +724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -783,7 +786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -972,7 +975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1034,7 +1037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1174,7 +1177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1 &748346500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,7 +1224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1 &756396421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,7 +1271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,7 +1340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1396,7 +1402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1458,7 +1464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1547,7 +1553,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1001 &1122169709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1566,7 +1573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1628,7 +1635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1690,7 +1697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1774,7 +1781,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1 &1471121286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,7 +1828,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1 &1475125642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,7 +1875,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1001 &1480393600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1885,7 +1895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1947,7 +1957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2009,7 +2019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2071,7 +2081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2160,7 +2170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1 &1896444178
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,7 +2261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1001 &2004043191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2269,7 +2281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2331,7 +2343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2393,7 +2405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317137670544679901, guid: 65814bf2a0d00864b8e95c816ede7d5e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2482,7 +2494,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1 &2047278947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,7 +2541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   _drawGizmos: 1
-  _hideGizmosOnPlay: 1
+  _gizmosColor: {r: 0, g: 1, b: 1, a: 1}
+  _hideGizmosOnPlay: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

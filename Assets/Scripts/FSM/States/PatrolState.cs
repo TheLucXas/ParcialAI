@@ -40,7 +40,8 @@ public class PatrolState : State
         if (_timer >= _ballSpawnTime && _ballsCount + 1 <= _data.maxBallsCount)
         {
             //_agent.FSM.ChangeState(_agent.SpawnBall);
-            GameObject ballObj = Object.Instantiate(_data.ball, _data.transform.position, _data.transform.rotation);
+            var pos = new Vector3(_data.transform.position.x, 0f, _data.transform.position.z);
+            GameObject ballObj = Object.Instantiate(_data.ball, pos, _data.transform.rotation);
             _ballsCount++;
             if (ballObj.TryGetComponent<Ball>(out var ballEntity)) ballEntity.OnDestroyed += SubtractBall;
                 _ballSpawnTime = Random.Range(_data.minBallSpawnTime, _data.maxBallSpawnTime);

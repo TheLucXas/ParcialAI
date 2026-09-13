@@ -4,13 +4,12 @@ using UnityEngine;
 public class AttackState : State
 {
     private AttackData _data;
+    private FSMAgent _agent;
 
-    private float MeleeAttackRadius = 3f;
-    private float RangeAttackRadius = 6f;
-
-    public AttackState(AttackData data)
+    public AttackState(AttackData data, FSMAgent agent)
     {
         _data = data;
+        _agent = agent;
     }
 
     public override void Enter()
@@ -31,4 +30,6 @@ public class AttackState : State
 public class AttackData
 {
     public Transform target;
+    public float MeleeAttackRadius = 3f;
+    public float RangeAttackRadius = 6f;
 }
