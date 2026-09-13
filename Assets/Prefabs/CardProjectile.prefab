@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3462546160250400152
+--- !u!1 &2579502621526434388
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7317137670544679901}
-  - component: {fileID: 5970915381856134857}
-  - component: {fileID: 4021515383455754432}
-  - component: {fileID: 310931823347752373}
-  - component: {fileID: 6761140441652180538}
-  m_Layer: 3
-  m_Name: Player
+  - component: {fileID: 1153559716112498184}
+  - component: {fileID: 8125734245060780912}
+  - component: {fileID: 8264334965706626365}
+  - component: {fileID: 4368075345983650082}
+  - component: {fileID: 2395138093892445455}
+  m_Layer: 0
+  m_Name: CardProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7317137670544679901
+--- !u!4 &1153559716112498184
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3462546160250400152}
+  m_GameObject: {fileID: 2579502621526434388}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.025, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5970915381856134857
+--- !u!33 &8125734245060780912
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3462546160250400152}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4021515383455754432
+  m_GameObject: {fileID: 2579502621526434388}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8264334965706626365
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3462546160250400152}
+  m_GameObject: {fileID: 2579502621526434388}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,13 +92,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &310931823347752373
-CapsuleCollider:
+--- !u!65 &4368075345983650082
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3462546160250400152}
+  m_GameObject: {fileID: 2579502621526434388}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -110,35 +110,19 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6761140441652180538
+--- !u!114 &2395138093892445455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3462546160250400152}
+  m_GameObject: {fileID: 2579502621526434388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b66e156f9c3cc648bedb5dd22837906, type: 3}
+  m_Script: {fileID: 11500000, guid: b81a8a07171bc6a469cdc4378c05ce35, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Agent
-  _maxHealth: 2
-  _respawnTime: 6
-  _maxSpeed: 15
-  _maxForce: 10
-  _viewRadius: 7
-  _currentMode: 5
-  _arriveRadius: 3
-  _gizmosFlockingColor: {r: 0.627451, g: 0.1254902, b: 0.9411765, a: 1}
-  _separationRadius: 3.5
-  _separationWeight: 1.33
-  _cohesionWeight: 0.61
-  _alignmentWeight: 1.51
-  target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
-  targetAgent: {fileID: 0}
-  _meshRenderer: {fileID: 4021515383455754432}
+  m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  _renderer: {fileID: 8264334965706626365}

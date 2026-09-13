@@ -7,9 +7,10 @@ public class AttackState : State
     private AttackData _data;
     private FSMAgent _agent;
 
-    private bool _isAttacking = false;
     private Transform _target;
     private Agent _targetAgent;
+
+    private float _rangedWaitTimer = 0f;
 
     public void SetTarget(Transform target) => _target = target;
 
@@ -21,10 +22,9 @@ public class AttackState : State
 
     public override void Enter()
     {
-        _isAttacking = false;
-
         if (_target != null) _targetAgent = _target.GetComponentInParent<Agent>();
 
+        _rangedWaitTimer = 0f;
     }
 
     public override void Update()
@@ -43,43 +43,65 @@ public class AttackState : State
 
         float dist = Vector3.Distance(_target.position, _agent.transform.position);
 
-        if (dist > _agent.PerceptionRadius)
+        if (dist > _agent.PerceptionRadius + 1.5f)
         {
             _agent.FSM.ChangeState(_agent.Patrol);
             return;
         }
 
         _agent.CurrentVelocity += SteeringUtils.CalculatePursuit(_agent.transform.position, _agent.CurrentVelocity, _data.ChaseSpeed, _data.ChaseForce, _target.position, _targetAgent.Velocity);
+
+        _agent.CurrentVelocity = new Vector3(_agent.CurrentVelocity.x, 0f, _agent.CurrentVelocity.z);
+
         if (_agent.CurrentVelocity.sqrMagnitude > 0.0001f)
         {
             _agent.transform.position += _agent.CurrentVelocity * Time.deltaTime;
-            _agent.transform.forward = _agent.CurrentVelocity;
+            _agent.transform.forward = _agent.CurrentVelocity.normalized;
             _agent.transform.position = Bounds.Instance.CalculateBoundPosition(_agent.transform.position);
         }
 
-        if (!_isAttacking && dist <= _data.MeleeAttackRadius)
+        if (dist <= _data.MeleeAttackRadius)
         {
             _targetAgent.TakeDamage(_data.AttackDamage * 2f);
 
-            _agent.AttackCooldownTimer = _data.TimeBetweenAttacks;
+            ShootCard(0f, true);
 
+            _agent.AttackCooldownTimer = _data.TimeBetweenAttacks;
             _agent.FSM.ChangeState(_agent.Patrol);
             return;
         }
-        else if (!_isAttacking && dist <= _data.RangeAttackRadius)
+        else if (dist <= _data.RangeAttackRadius)
         {
-            _targetAgent.TakeDamage(_data.AttackDamage);
+            _rangedWaitTimer += Time.deltaTime;
 
-            _agent.AttackCooldownTimer = _data.TimeBetweenAttacks;
+            if (_rangedWaitTimer >= _data.RangedAttackDelay)
+            {
+                ShootCard(_data.AttackDamage, false);
 
-            _agent.FSM.ChangeState(_agent.Patrol);
-            return;
+                _agent.AttackCooldownTimer = _data.TimeBetweenAttacks;
+                _agent.FSM.ChangeState(_agent.Patrol);
+                return;
+            }
+        }
+        else
+        {
+            _rangedWaitTimer = 0f;
+        }
+    }
+
+    private void ShootCard(float damage, bool isMelee)
+    {
+        if (_data.ProjectilePrefab != null)
+        {
+            Vector3 spawnPos = _agent.transform.position + (Vector3.up * 1f);
+            Projectile newProjectile = Object.Instantiate(_data.ProjectilePrefab, spawnPos, Quaternion.identity);
+
+            newProjectile.Initialize(_targetAgent, damage, isMelee, _data.MeleeAttackRadius);
         }
     }
 
     public override void Exit()
     {
-        _isAttacking = false;
         _target = null;
         _targetAgent = null;
     }
@@ -94,4 +116,8 @@ public class AttackData
     public float TimeBetweenAttacks = 5f;
     public float ChaseSpeed = 14f;
     public float ChaseForce = 14f;
+
+    public float RangedAttackDelay = 1.5f;
+
+    public Projectile ProjectilePrefab;
 }

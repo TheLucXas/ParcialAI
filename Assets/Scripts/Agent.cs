@@ -41,14 +41,22 @@ public class Agent : MonoBehaviour
 
     private static readonly List<Agent> _allAgents = new();
 
+    [Header("Visual Feedback")]
+    [SerializeField] private MeshRenderer _meshRenderer;
+    private Color _originalColor;
+    private Coroutine _damageFlashCoroutine;
+
     private Vector3 _velocity;
     public Vector3 Velocity => _velocity;
     public bool IsDead => _isDead;
+    private int _originalLayer;
 
     private void Awake()
     {
         _allAgents.Add(this);
         _currentHealth = _maxHealth;
+        _originalLayer = gameObject.layer;
+        if (_meshRenderer != null) _originalColor = _meshRenderer.material.color;
     }
 
     private void Start()
@@ -78,12 +86,21 @@ public class Agent : MonoBehaviour
 
         _currentHealth -= amount;
 
+        if (_meshRenderer != null)
+        {
+            if (_damageFlashCoroutine != null) StopCoroutine(_damageFlashCoroutine);
+            _damageFlashCoroutine = StartCoroutine(DamageFlash());
+        }
+
         if (_currentHealth <= 0f)
         {
             _currentHealth = 0f;
             _isDead = true;
             _velocity = Vector3.zero;
             gameObject.layer = LayerMask.NameToLayer("Gather");
+
+            if (_meshRenderer != null) _meshRenderer.material.color = Color.red;
+
             StartCoroutine(WaitToRespawn());
         }
     }
@@ -95,11 +112,33 @@ public class Agent : MonoBehaviour
 
     }
 
+    private IEnumerator DamageFlash()
+    {
+        _meshRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.125f);
+        _meshRenderer.material.color = _originalColor;
+        yield return new WaitForSeconds(0.125f);
+
+        _meshRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.125f);
+        _meshRenderer.material.color = _originalColor;
+        yield return new WaitForSeconds(0.125f);
+
+        _meshRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.125f);
+
+        if (!_isDead) _meshRenderer.material.color = _originalColor;
+    }
+
     public void Respawn()
     {
         transform.position = Bounds.Instance.GetRandomPointInBounds();
         _currentHealth = _maxHealth;
         _isDead = false;
+        gameObject.layer = _originalLayer;
+
+        if (_meshRenderer != null) _meshRenderer.material.color = _originalColor;
+
         AgentVisibility(true);
     }
 
@@ -125,7 +164,7 @@ public class Agent : MonoBehaviour
 
         foreach (Agent item in agents)
         {
-            if (item == this) continue;
+            if (item == this || item.IsDead) continue;
             if (InRange(item.transform.position, radius))
             {
                 desiredPosition += item.transform.position;
@@ -147,7 +186,7 @@ public class Agent : MonoBehaviour
 
         foreach (Agent item in agents)
         {
-            if (item == this) continue;
+            if (item == this || item.IsDead) continue;
             if (InRange(item.transform.position, radius))
             {
                 desired += (item.transform.position - transform.position);
@@ -170,7 +209,7 @@ public class Agent : MonoBehaviour
 
         foreach (Agent item in agents)
         {
-            if (item == this) continue;
+            if (item == this || item.IsDead) continue;
             if (InRange(item.transform.position, radius))
             {
                 desired += item.Velocity;

@@ -36,6 +36,12 @@ public class Bounds : MonoBehaviour
         return new Vector3(x, 0f, z);
     }
 
+    public bool IsOutOfBounds(Vector3 position)
+    {
+        return position.x > _width / 2f || position.x < -_width / 2f ||
+               position.z > _height / 2f || position.z < -_height / 2f;
+    }
+
     private void OnDrawGizmos()
     {
         if (!_drawGizmos) return;

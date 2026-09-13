@@ -192,6 +192,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _attackData.ProjectilePrefab
+      value: 
+      objectReference: {fileID: 2395138093892445455, guid: 2e5946f064e91b94395abfdf41bb0586, type: 3}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: _patrolData.boidLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
@@ -201,7 +205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: _attackData.RangeAttackRadius
-      value: 3.5
+      value: 4.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _attackData.RangedAttackDelay
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: _patrolData.waypoints.Array.size

@@ -148,6 +148,8 @@ MonoBehaviour:
     TimeBetweenAttacks: 5
     ChaseSpeed: 14
     ChaseForce: 14
+    RangedAttackDelay: 1.5
+    ProjectilePrefab: {fileID: 2395138093892445455, guid: 2e5946f064e91b94395abfdf41bb0586, type: 3}
   _drawGizmos: 1
   _meleeGizmoColor: {r: 1, g: 0, b: 0, a: 1}
   _rangeGizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
