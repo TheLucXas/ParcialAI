@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Agent
   _maxHealth: 2
-  _respawnTime: 6
+  _respawnTime: 10
   _maxSpeed: 15
   _maxForce: 10
   _viewRadius: 7

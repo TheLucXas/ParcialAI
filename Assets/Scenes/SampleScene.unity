@@ -201,15 +201,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: _attackData.MeleeAttackRadius
-      value: 2
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: _attackData.RangeAttackRadius
-      value: 4.25
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: _attackData.RangedAttackDelay
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
+      propertyPath: _patrolData.gatherLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 8115026315290038201, guid: 814955b7c33960342a025540ad3d382d, type: 3}
       propertyPath: _patrolData.waypoints.Array.size

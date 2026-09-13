@@ -29,6 +29,12 @@ public class AttackState : State
 
     public override void Update()
     {
+        if (_target == null || _targetAgent == null)
+        {
+            _agent.FSM.ChangeState(_agent.Patrol);
+            return;
+        }
+
         if (_targetAgent != null && _targetAgent.IsDead)
         {
             _agent.FSM.ChangeState(_agent.Patrol);
@@ -57,7 +63,6 @@ public class AttackState : State
         {
             _agent.transform.position += _agent.CurrentVelocity * Time.deltaTime;
             _agent.transform.forward = _agent.CurrentVelocity.normalized;
-            _agent.transform.position = Bounds.Instance.CalculateBoundPosition(_agent.transform.position);
         }
 
         if (dist <= _data.MeleeAttackRadius)

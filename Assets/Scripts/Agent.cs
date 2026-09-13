@@ -21,6 +21,7 @@ public class Agent : MonoBehaviour
     private SteeringModes _currentMode;
     [SerializeField]
     private float _arriveRadius = 3f;
+    private LayerMask _originalMask;
     [SerializeField] private Color _gizmosFlockingColor = Color.purple;
 
     [Header("Flocking values")]
@@ -135,7 +136,6 @@ public class Agent : MonoBehaviour
         transform.position = Bounds.Instance.GetRandomPointInBounds();
         _currentHealth = _maxHealth;
         _isDead = false;
-        gameObject.layer = _originalLayer;
 
         if (_meshRenderer != null) _meshRenderer.material.color = _originalColor;
 
@@ -144,7 +144,9 @@ public class Agent : MonoBehaviour
 
     public void AgentVisibility(bool visible)
     {
-        gameObject.SetActive(visible);
+        gameObject.layer = visible ? _originalLayer : 0;
+
+        if (_meshRenderer != null) _meshRenderer.enabled = visible;
     }
 
     #region Steering Behaviors

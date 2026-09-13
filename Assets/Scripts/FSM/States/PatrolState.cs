@@ -34,6 +34,15 @@ public class PatrolState : State
             return;
         }
 
+        hitCount = Physics.OverlapSphereNonAlloc(_data.transform.position, _data.detectionRadius, _detectionBuffer, _data.gatherLayer);
+
+        if (hitCount > 0)
+        {
+            _agent.Gather.SetTarget(_detectionBuffer[0].transform);
+            _agent.FSM.ChangeState(_agent.Gather);
+            return;
+        }
+
         _timer += Time.deltaTime;
         Transform nextWaypoint = _data.waypoints[_currentIndex];
 
@@ -95,4 +104,5 @@ public class PatrolData
     public float maxBallSpawnTime = 9f;
     public float maxBallsCount = 5;
     public LayerMask boidLayer;
+    public LayerMask gatherLayer;
 }

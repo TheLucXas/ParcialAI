@@ -7,6 +7,7 @@ public class FSMAgent : MonoBehaviour
 {
     [SerializeField] private PatrolData _patrolData;
     [SerializeField] private AttackData _attackData;
+    [SerializeField] private GatherData _gatherData;
     [SerializeField] private bool _drawGizmos = true;
     [SerializeField] private Color _meleeGizmoColor = Color.red;
     [SerializeField] private Color _rangeGizmoColor = Color.yellow;
@@ -22,15 +23,18 @@ public class FSMAgent : MonoBehaviour
     public IdleState Idle { get; private set; }
     public PatrolState Patrol { get; private set; }
     public AttackState Attack { get; private set; }
+    public GatherState Gather { get; private set; }
 
     private void Start()
     {
         Idle = new(this);
         Patrol = new(_patrolData, this);
         Attack = new(_attackData, this);
+        Gather = new(_gatherData, this);
         _fsm.AddState(Idle);
         _fsm.AddState(Patrol);
         _fsm.AddState(Attack);
+        _fsm.AddState(Gather);
         _fsm.ChangeState(Idle);
     }
     private void Update()
@@ -41,6 +45,8 @@ public class FSMAgent : MonoBehaviour
         }
 
         _fsm.Update();
+
+        transform.position = Bounds.Instance.CalculateBoundPosition(transform.position);
     }
 
     private void OnDrawGizmos()
