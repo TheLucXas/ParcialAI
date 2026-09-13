@@ -4,7 +4,7 @@ public class IdleState : State
 {
     private readonly FSMAgent _agent;
     readonly float _timeToChangeToPatrol = 3f;
-    float _timer = 0f;
+    private float _timer = 0f;
 
     public IdleState(FSMAgent agent) => _agent = agent;
 
