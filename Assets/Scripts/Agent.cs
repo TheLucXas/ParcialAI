@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Agent : MonoBehaviour
@@ -55,6 +56,7 @@ public class Agent : MonoBehaviour
     [Header("Visual Feedback")]
     [SerializeField] private Sprite[] _agentSprites;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private TextMeshPro _textMeshPro;
     private Color _originalColor;
     private Coroutine _damageFlashCoroutine;
 
@@ -92,6 +94,8 @@ public class Agent : MonoBehaviour
 
         if (hunterHitCount > 0 && _hunterBuffer[0].TryGetComponent<FSMAgent>(out var hunter))
         {
+            UpdateStateText(SteeringModes.Evade, "Evade");
+
             steeringForce += SteeringUtils.CalculateEvade(
                 transform.position,
                 _velocity,
@@ -103,6 +107,8 @@ public class Agent : MonoBehaviour
         }
         else if (rewardHitCount > 0)
         {
+            UpdateStateText(SteeringModes.Arrive, "Gather/Arrive");
+
             Vector3 ballPosition = _detectionBuffer[0].transform.position;
             Vector3 flatBallPos = new Vector3(ballPosition.x, 0f, ballPosition.z);
 
@@ -124,6 +130,8 @@ public class Agent : MonoBehaviour
         }
         else
         {
+            UpdateStateText(SteeringModes.Flocking, "Flocking");
+
             steeringForce += CalculateFlocking();
         }
 
@@ -160,6 +168,8 @@ public class Agent : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Gather");
 
             if (_spriteRenderer != null) _spriteRenderer.color = Color.red;
+
+            if (_textMeshPro != null) _textMeshPro.text = "Dead";
         }
     }
 
@@ -201,6 +211,8 @@ public class Agent : MonoBehaviour
         _currentHealth = _maxHealth;
         _isDead = false;
 
+        if (_textMeshPro != null) _textMeshPro.text = "Flocking";
+
         if (_spriteRenderer != null) _spriteRenderer.color = _originalColor;
 
         AgentVisibility(true);
@@ -211,9 +223,24 @@ public class Agent : MonoBehaviour
         gameObject.layer = visible ? _originalLayer : 0;
 
         if (_spriteRenderer != null) _spriteRenderer.enabled = visible;
+
+        if (_textMeshPro != null) _textMeshPro.text = "";
     }
 
     #region Steering Behaviors
+
+    private void UpdateStateText(SteeringModes newMode, string text)
+    {
+        if (_currentMode != newMode)
+        {
+            _currentMode = newMode;
+
+            if (_textMeshPro != null)
+            {
+                _textMeshPro.text = text;
+            }
+        }
+    }
 
     #region Flocking
     private Vector3 CalculateFlocking()
