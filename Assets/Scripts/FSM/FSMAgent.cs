@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class FSMAgent : MonoBehaviour
 {
@@ -12,6 +9,8 @@ public class FSMAgent : MonoBehaviour
     [SerializeField] private Color _meleeGizmoColor = Color.red;
     [SerializeField] private Color _rangeGizmoColor = Color.yellow;
     [SerializeField] private Color _radiusGizmoColor = Color.green;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Sprite[] _refereeSprites;
     public float PerceptionRadius => _patrolData.detectionRadius;
     public float AttackCooldownTimer { get; set; } = 0f;
     public Vector3 CurrentVelocity { get; set; } = Vector3.zero;
@@ -36,6 +35,8 @@ public class FSMAgent : MonoBehaviour
         _fsm.AddState(Attack);
         _fsm.AddState(Gather);
         _fsm.ChangeState(Idle);
+        int spriteIndex = Random.Range(0, _refereeSprites.Length);
+        if (_refereeSprites != null && _spriteRenderer != null) _spriteRenderer.sprite = _refereeSprites[spriteIndex];
     }
     private void Update()
     {

@@ -6,15 +6,15 @@ public class Projectile : MonoBehaviour
     private Agent _target;
     private float _damage;
 
-    private float _speed = 60f;
-    private float _maxForce = 5000f;
+    private float _speed = 40f;
+    private float _maxForce = 20f;
     private Vector3 _velocity;
 
     private Vector3 _startPosition;
     private float _meleeRange;
     private bool _isMeleeShot;
 
-    private float _lifetime = 4f;
+    private float _lifetime = 2f;
 
     public void Initialize(Agent target, float damage, bool isMelee, float meleeRange)
     {
@@ -27,23 +27,28 @@ public class Projectile : MonoBehaviour
         if (_renderer != null)
         {
             _renderer.material.color = isMelee ? Color.red : Color.yellow;
-            _speed = isMelee ? 120f : 80f;
+            _speed = isMelee ? 60f : 40f;
         }
     }
 
     private void Update()
     {
         _lifetime -= Time.deltaTime;
-        if (_lifetime <= 0f)
+
+        if (_lifetime <= 0f || _target == null)
         {
             Destroy(gameObject);
             return;
         }
 
-        if (_target == null)
+        _velocity += SteeringUtils.CalculatePursuit(transform.position, _velocity, _speed, _maxForce, _target.transform.position, _target.Velocity);
+        _velocity.y = 0f;
+
+        transform.position += _velocity * Time.deltaTime;
+
+        if (_velocity.sqrMagnitude > 0.0001f)
         {
-            Destroy(gameObject);
-            return;
+            transform.forward = _velocity.normalized;
         }
 
         if (!_isMeleeShot && Bounds.Instance.IsOutOfBounds(transform.position))
@@ -58,24 +63,12 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        _velocity += SteeringUtils.CalculatePursuit(transform.position, _velocity, _speed, _maxForce, _target.transform.position, _target.Velocity);
-
-        _velocity.y = 0f;
-
-        transform.position += _velocity * Time.deltaTime;
-
-        if (_velocity.sqrMagnitude > 0.0001f)
-        {
-            transform.forward = _velocity.normalized;
-        }
-
         Vector3 projPos2D = new Vector3(transform.position.x, 0f, transform.position.z);
         Vector3 targetPos2D = new Vector3(_target.transform.position.x, 0f, _target.transform.position.z);
 
-        float distanceToTarget = Vector3.Distance(projPos2D, targetPos2D);
         float impactThreshold = 1.5f;
 
-        if (distanceToTarget <= impactThreshold)
+        if (Vector3.Distance(projPos2D, targetPos2D) <= impactThreshold)
         {
             _target.TakeDamage(_damage);
             Destroy(gameObject);

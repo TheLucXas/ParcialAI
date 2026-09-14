@@ -53,7 +53,8 @@ public class Agent : MonoBehaviour
     private readonly Collider[] _hunterBuffer = new Collider[1];
 
     [Header("Visual Feedback")]
-    [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] private Sprite[] _agentSprites;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
     private Coroutine _damageFlashCoroutine;
 
@@ -68,7 +69,7 @@ public class Agent : MonoBehaviour
         _allAgents.Add(this);
         _currentHealth = _maxHealth;
         _originalLayer = gameObject.layer;
-        if (_meshRenderer != null) _originalColor = _meshRenderer.material.color;
+        if (_spriteRenderer != null) _originalColor = _spriteRenderer.color;
     }
 
     private void Start()
@@ -76,6 +77,8 @@ public class Agent : MonoBehaviour
         Vector3 randomVector = new(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
         _velocity += randomVector.normalized * _maxSpeed;
         _timer = _attackCooldown;
+        int spriteIndex = Random.Range(0, _agentSprites.Length);
+        if (_agentSprites != null && _spriteRenderer != null) _spriteRenderer.sprite = _agentSprites[spriteIndex];
     }
 
     private void Update()
@@ -143,7 +146,7 @@ public class Agent : MonoBehaviour
 
         _currentHealth -= amount;
 
-        if (_meshRenderer != null)
+        if (_spriteRenderer != null)
         {
             if (_damageFlashCoroutine != null) StopCoroutine(_damageFlashCoroutine);
             _damageFlashCoroutine = StartCoroutine(DamageFlash());
@@ -156,7 +159,7 @@ public class Agent : MonoBehaviour
             _velocity = Vector3.zero;
             gameObject.layer = LayerMask.NameToLayer("Gather");
 
-            if (_meshRenderer != null) _meshRenderer.material.color = Color.red;
+            if (_spriteRenderer != null) _spriteRenderer.color = Color.red;
         }
     }
 
@@ -174,20 +177,22 @@ public class Agent : MonoBehaviour
 
     private IEnumerator DamageFlash()
     {
-        _meshRenderer.material.color = Color.red;
+        if (_spriteRenderer == null) yield break;
+
+        _spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.125f);
-        _meshRenderer.material.color = _originalColor;
+        _spriteRenderer.color = _originalColor;
         yield return new WaitForSeconds(0.125f);
 
-        _meshRenderer.material.color = Color.red;
+        _spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.125f);
-        _meshRenderer.material.color = _originalColor;
-        yield return new WaitForSeconds(0.125f);
-
-        _meshRenderer.material.color = Color.red;
+        _spriteRenderer.color = _originalColor;
         yield return new WaitForSeconds(0.125f);
 
-        if (!_isDead) _meshRenderer.material.color = _originalColor;
+        _spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.125f);
+
+        if (!_isDead) _spriteRenderer.color = _originalColor;
     }
 
     public void Respawn()
@@ -196,7 +201,7 @@ public class Agent : MonoBehaviour
         _currentHealth = _maxHealth;
         _isDead = false;
 
-        if (_meshRenderer != null) _meshRenderer.material.color = _originalColor;
+        if (_spriteRenderer != null) _spriteRenderer.color = _originalColor;
 
         AgentVisibility(true);
     }
@@ -205,7 +210,7 @@ public class Agent : MonoBehaviour
     {
         gameObject.layer = visible ? _originalLayer : 0;
 
-        if (_meshRenderer != null) _meshRenderer.enabled = visible;
+        if (_spriteRenderer != null) _spriteRenderer.enabled = visible;
     }
 
     #region Steering Behaviors
@@ -286,34 +291,12 @@ public class Agent : MonoBehaviour
 
     #endregion
 
-    private Vector3 CalculatePursuit(Agent target) =>
-        SteeringUtils.CalculatePursuit(transform.position, _velocity, _maxSpeed, _maxForce, target.transform.position, target.Velocity);
-    private Vector3 CalculateEvade(Agent target) =>
-         SteeringUtils.CalculateEvade(transform.position, _velocity, _maxSpeed, _maxForce, target.transform.position, target.Velocity);
-
     private Vector3 CalculateSeek(Vector3 targetPosition) =>
         SteeringUtils.CalculateSeek(transform.position, _velocity, targetPosition, _maxSpeed, _maxForce);
-
-    private Vector3 CalculateFlee(Vector3 targetPosition) =>
-        SteeringUtils.CalculateFlee(transform.position, _velocity, targetPosition, _maxSpeed, _maxForce);
 
     private Vector3 CalculateArrive(Vector3 targetPosition) =>
         SteeringUtils.CalculateArrive(transform.position, _velocity, targetPosition, _maxSpeed, _maxForce, _arriveRadius);
 
-    #endregion
-
-    #region Steering
-    private Vector3 GetCurrentSteeringMode() => GetSteering(_currentMode, target.position);
-    private Vector3 GetSteering(SteeringModes mode, Vector3 targetPosition)
-    {
-        return mode switch
-        {
-            SteeringModes.Seek => CalculateSeek(targetPosition),
-            SteeringModes.Flee => CalculateFlee(targetPosition),
-            SteeringModes.Arrive => CalculateArrive(targetPosition),
-            _ => Vector3.zero,
-        };
-    }
     #endregion
 
     private void OnDestroy()
@@ -323,6 +306,8 @@ public class Agent : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (_isDead) return;
+
         Vector3 pos2D = new Vector3(transform.position.x, 0f, transform.position.z);
 
         Gizmos.color = Color.white;

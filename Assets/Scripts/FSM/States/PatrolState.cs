@@ -59,11 +59,11 @@ public class PatrolState : State
         _agent.CurrentVelocity += SteeringUtils.CalculateSeek(agentPos2D, _agent.CurrentVelocity, waypointPos2D, _data.speed, _data.steerForce);
         _agent.CurrentVelocity = new Vector3(_agent.CurrentVelocity.x, 0f, _agent.CurrentVelocity.z);
 
-        _data.transform.position += _agent.CurrentVelocity * Time.deltaTime;
+        _agent.transform.position += _agent.CurrentVelocity * Time.deltaTime;
 
         if (_agent.CurrentVelocity.sqrMagnitude > 0.0001f)
         {
-            _data.transform.forward = _agent.CurrentVelocity.normalized;
+            _agent.transform.forward = _agent.CurrentVelocity.normalized;
         }
 
         if (_timer >= _ballSpawnTime && _ballsCount + 1 <= _data.maxBallsCount)

@@ -38,6 +38,13 @@ public class GatherState : State
             return;
         }
 
+        float dist = Vector3.Distance(_agent.transform.position, _target.position);
+        if (dist > _agent.PerceptionRadius + 1.5f)
+        {
+            _agent.FSM.ChangeState(_agent.Patrol);
+            return;
+        }
+
         if (_isGathering && _timer < _data.GatherTime)
         {
             _timer += Time.deltaTime;

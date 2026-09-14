@@ -184,4 +184,10 @@ MonoBehaviour:
   _alignmentWeight: 1.51
   target: {fileID: 371149759109899038, guid: 814955b7c33960342a025540ad3d382d, type: 3}
   targetAgent: {fileID: 0}
-  _meshRenderer: {fileID: 0}
+  _agentSprites:
+  - {fileID: 21300000, guid: c8c6a4411ede9c34ab6e7cde2afe27bf, type: 3}
+  - {fileID: 21300000, guid: d8f008a41c2a03e409f4421c0b6acb4e, type: 3}
+  - {fileID: 21300000, guid: ba224c14a34b71f48a90f598d559b929, type: 3}
+  - {fileID: 21300000, guid: 572d4438a840f1a4f9025f90ff830075, type: 3}
+  - {fileID: 21300000, guid: 21c8e0ab92833644da6de8429c7bc7d5, type: 3}
+  _spriteRenderer: {fileID: 1152720721590182555}
