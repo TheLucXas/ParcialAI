@@ -35,13 +35,7 @@ public class AttackState : State
             return;
         }
 
-        if (_targetAgent != null && _targetAgent.IsDead)
-        {
-            _agent.FSM.ChangeState(_agent.Patrol);
-            return;
-        }
-
-        if (_target == null)
+        if (_targetAgent.IsDead)
         {
             _agent.FSM.ChangeState(_agent.Patrol);
             return;

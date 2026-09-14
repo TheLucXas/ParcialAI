@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PatrolState : State
@@ -73,10 +72,9 @@ public class PatrolState : State
             GameObject ballObj = Object.Instantiate(_data.ball, pos, _data.transform.rotation);
             _ballsCount++;
             if (ballObj.TryGetComponent<Ball>(out var ballEntity)) ballEntity.OnDestroyed += SubtractBall;
-                _ballSpawnTime = Random.Range(_data.minBallSpawnTime, _data.maxBallSpawnTime);
+            _ballSpawnTime = Random.Range(_data.minBallSpawnTime, _data.maxBallSpawnTime);
             _timer = 0;
         }
-
     }
 
     private void SubtractBall(Ball ball)
@@ -102,7 +100,7 @@ public class PatrolData
     public float detectionRadius = 8f;
     public float minBallSpawnTime = 3f;
     public float maxBallSpawnTime = 9f;
-    public float maxBallsCount = 5;
+    public int maxBallsCount = 5;
     public LayerMask boidLayer;
     public LayerMask gatherLayer;
 }

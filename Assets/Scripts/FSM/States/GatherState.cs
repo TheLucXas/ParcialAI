@@ -45,7 +45,7 @@ public class GatherState : State
         }
         else if (_timer >= _data.GatherTime)
         {
-            _targetAgent.AgentVisibility(false);
+            _targetAgent.Collect();
             _agent.FSM.ChangeState(_agent.Patrol);
             return;
         }

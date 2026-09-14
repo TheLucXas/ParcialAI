@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class Agent : MonoBehaviour
@@ -101,23 +100,23 @@ public class Agent : MonoBehaviour
         }
         else if (rewardHitCount > 0)
         {
-
             Vector3 ballPosition = _detectionBuffer[0].transform.position;
             Vector3 flatBallPos = new Vector3(ballPosition.x, 0f, ballPosition.z);
 
             steeringForce += CalculateArrive(flatBallPos);
-
             steeringForce += CalculateSeparation(_allAgents, _separationRadius) * _separationWeight;
 
             if (Vector3.Distance(transform.position, ballPosition) <= _arriveRadius)
             {
+                _velocity = Vector3.zero;
+                _timer += Time.deltaTime;
+
                 if (_timer >= _attackCooldown)
                 {
-                    StartCoroutine(AttackCorutine(_detectionBuffer[0].gameObject));
-                    _velocity = Vector3.zero;
-                    return;
+                    _timer = 0f;
+                    if (_detectionBuffer[0].TryGetComponent<Ball>(out var ball)) ball.TakeDamage(_attackDamage);
                 }
-                else _timer -= Time.deltaTime;
+                return;
             }
         }
         else
@@ -136,13 +135,6 @@ public class Agent : MonoBehaviour
         }
 
         transform.position = Bounds.Instance.CalculateBoundPosition(transform.position);
-    }
-
-    IEnumerator AttackCorutine(GameObject target)
-    {
-        target.GetComponent<Ball>().TakeDamage(_attackDamage);
-        yield return new WaitForSeconds(_attackCooldown);
-        _timer = _attackCooldown;
     }
 
     public void TakeDamage(float amount)
@@ -165,16 +157,19 @@ public class Agent : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Gather");
 
             if (_meshRenderer != null) _meshRenderer.material.color = Color.red;
-
-            StartCoroutine(WaitToRespawn());
         }
+    }
+
+    public void Collect()
+    {
+        AgentVisibility(false);
+        StartCoroutine(WaitToRespawn());
     }
 
     private IEnumerator WaitToRespawn()
     {
         yield return new WaitForSeconds(_respawnTime);
         Respawn();
-
     }
 
     private IEnumerator DamageFlash()
@@ -266,7 +261,6 @@ public class Agent : MonoBehaviour
 
         return SteeringUtils.CalculateSteering(_velocity, -desired.normalized * _maxSpeed, _maxForce);
     }
-
 
     private Vector3 CalculateAlignment(List<Agent> agents, float radius)
     {

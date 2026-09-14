@@ -7,6 +7,7 @@ public class Bounds : MonoBehaviour
     private float _height = 34f;
     [SerializeField]
     private float _width = 52.2f;
+    [SerializeField] private GameObject _backgroundField;
     [SerializeField] private bool _drawGizmos;
     [SerializeField] private Color _gizmosColor = Color.white;
 
@@ -14,6 +15,14 @@ public class Bounds : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    private void OnValidate()
+    {
+        if (_backgroundField != null)
+        {
+            _backgroundField.transform.localScale = new Vector3(_width, _height, 1f);
+        }
     }
 
     public Vector3 CalculateBoundPosition(Vector3 position)
