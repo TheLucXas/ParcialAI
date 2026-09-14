@@ -2,23 +2,31 @@ using UnityEngine;
 
 public class GatherState : State
 {
+    #region Private Fields
     private GatherData _data;
     private FSMAgent _agent;
     private Transform _target;
     private Agent _targetAgent;
     private bool _isGathering;
     private float _timer;
+    #endregion
 
-    public void SetTarget(Transform target) => _target = target;
-
+    #region Constructor
     public GatherState(GatherData data, FSMAgent agent)
     {
         _data = data;
         _agent = agent;
     }
+    #endregion
 
+    #region Public Methods
+    public void SetTarget(Transform target) => _target = target;
+    #endregion
+
+    #region State Overrides
     public override void Enter()
     {
+        _agent.UpdateStateText("Gather");
         if (_target != null) _targetAgent = _target.GetComponentInParent<Agent>();
         _isGathering = false;
         _timer = 0;
@@ -92,12 +100,16 @@ public class GatherState : State
         _targetAgent = null;
         _isGathering = false;
     }
+    #endregion
 }
 
 [System.Serializable]
 public class GatherData
 {
+    [Header("Timing")]
     public float GatherTime = 3f;
+
+    [Header("Movement")]
     public float Speed = 13f;
     public float SteerForce = 10f;
     public float ArriveRadius = 1.75f;

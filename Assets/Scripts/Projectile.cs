@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    #region Serialized Fields
     [SerializeField] private MeshRenderer _renderer;
+    #endregion
+
+    #region Private Fields
     private Agent _target;
     private float _damage;
 
@@ -15,22 +19,9 @@ public class Projectile : MonoBehaviour
     private bool _isMeleeShot;
 
     private float _lifetime = 2f;
+    #endregion
 
-    public void Initialize(Agent target, float damage, bool isMelee, float meleeRange)
-    {
-        _target = target;
-        _damage = damage;
-        _startPosition = transform.position;
-        _isMeleeShot = isMelee;
-        _meleeRange = meleeRange;
-
-        if (_renderer != null)
-        {
-            _renderer.material.color = isMelee ? Color.red : Color.yellow;
-            _speed = isMelee ? 60f : 40f;
-        }
-    }
-
+    #region Unity Callbacks
     private void Update()
     {
         _lifetime -= Time.deltaTime;
@@ -74,4 +65,22 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    #endregion
+
+    #region Public Methods
+    public void Initialize(Agent target, float damage, bool isMelee, float meleeRange)
+    {
+        _target = target;
+        _damage = damage;
+        _startPosition = transform.position;
+        _isMeleeShot = isMelee;
+        _meleeRange = meleeRange;
+
+        if (_renderer != null)
+        {
+            _renderer.material.color = isMelee ? Color.red : Color.yellow;
+            _speed = isMelee ? 60f : 40f;
+        }
+    }
+    #endregion
 }

@@ -3,21 +3,28 @@ using UnityEngine;
 
 public class PatrolState : State
 {
+    #region Private Fields
     private PatrolData _data;
+    private readonly FSMAgent _agent;
+    private readonly Collider[] _detectionBuffer = new Collider[1];
     private int _currentIndex = 0;
     private float _timer;
     private float _ballSpawnTime;
     private int _ballsCount = 0;
-    private readonly FSMAgent _agent;
-    private readonly Collider[] _detectionBuffer = new Collider[1];
+    #endregion
+
+    #region Constructor
     public PatrolState(PatrolData data, FSMAgent agent)
     {
         _data = data;
         _agent = agent;
     }
+    #endregion
 
+    #region State Overrides
     public override void Enter()
     {
+        _agent.UpdateStateText("Patrol");
         _timer = 0f;
         _ballSpawnTime = Random.Range(_data.minBallSpawnTime, _data.maxBallSpawnTime);
     }
@@ -43,6 +50,8 @@ public class PatrolState : State
         }
 
         _timer += Time.deltaTime;
+        if (_data.waypoints == null || _data.waypoints.Count == 0) return;
+
         Transform nextWaypoint = _data.waypoints[_currentIndex];
 
         Vector3 agentPos2D = new Vector3(_data.transform.position.x, 0f, _data.transform.position.z);
@@ -77,30 +86,40 @@ public class PatrolState : State
         }
     }
 
+    public override void Exit()
+    {
+    }
+    #endregion
+
+    #region Private Methods
     private void SubtractBall(Ball ball)
     {
         ball.OnDestroyed -= SubtractBall;
         _ballsCount--;
     }
-
-    public override void Exit()
-    {
-    }
+    #endregion
 }
 
 [System.Serializable]
 public class PatrolData
 {
+    [Header("Waypoints")]
     public List<Transform> waypoints;
     public Transform transform;
-    public GameObject ball;
     public float waypointCheckDistance;
+
+    [Header("Movement")]
     public float speed = 13f;
     public float steerForce = 10f;
+
+    [Header("Detection")]
     public float detectionRadius = 8f;
+    public LayerMask boidLayer;
+    public LayerMask gatherLayer;
+
+    [Header("Ball Spawning")]
+    public GameObject ball;
     public float minBallSpawnTime = 3f;
     public float maxBallSpawnTime = 9f;
     public int maxBallsCount = 5;
-    public LayerMask boidLayer;
-    public LayerMask gatherLayer;
 }

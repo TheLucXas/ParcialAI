@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bounds : MonoBehaviour
 {
-    public static Bounds Instance { get; private set; }
+    #region Serialized Fields
     [SerializeField]
     private float _height = 34f;
     [SerializeField]
@@ -10,7 +10,13 @@ public class Bounds : MonoBehaviour
     [SerializeField] private GameObject _backgroundField;
     [SerializeField] private bool _drawGizmos;
     [SerializeField] private Color _gizmosColor = Color.white;
+    #endregion
 
+    #region Properties
+    public static Bounds Instance { get; private set; }
+    #endregion
+
+    #region Unity Callbacks
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -25,6 +31,16 @@ public class Bounds : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        if (!_drawGizmos) return;
+
+        Gizmos.color = _gizmosColor;
+        Gizmos.DrawWireCube(transform.position, new Vector3(_width, 0f, _height));
+    }
+    #endregion
+
+    #region Public Methods
     public Vector3 CalculateBoundPosition(Vector3 position)
     {
         Vector3 newPosition = position;
@@ -50,13 +66,5 @@ public class Bounds : MonoBehaviour
         return position.x > _width / 2f || position.x < -_width / 2f ||
                position.z > _height / 2f || position.z < -_height / 2f;
     }
-
-    private void OnDrawGizmos()
-    {
-        if (!_drawGizmos) return;
-
-        Gizmos.color = _gizmosColor;
-        Gizmos.DrawWireCube(Vector3.zero, new Vector3(_width, 0f, _height));
-    }
-
+    #endregion
 }

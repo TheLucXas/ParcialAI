@@ -1,29 +1,42 @@
 using UnityEngine;
-
+using TMPro;
 public class FSMAgent : MonoBehaviour
 {
+    #region Serialized Fields
     [SerializeField] private PatrolData _patrolData;
     [SerializeField] private AttackData _attackData;
     [SerializeField] private GatherData _gatherData;
+
+    [Header("Gizmos")]
     [SerializeField] private bool _drawGizmos = true;
     [SerializeField] private Color _meleeGizmoColor = Color.red;
     [SerializeField] private Color _rangeGizmoColor = Color.yellow;
     [SerializeField] private Color _radiusGizmoColor = Color.green;
+
+    [Header("Visual Feedback")]
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Sprite[] _refereeSprites;
+    [SerializeField] private TextMeshProUGUI _stateText;
+    #endregion
+
+    #region Private Fields
+    private readonly FiniteStateMachine _fsm = new();
+    #endregion
+
+    #region Properties
     public float PerceptionRadius => _patrolData.detectionRadius;
     public float AttackCooldownTimer { get; set; } = 0f;
     public Vector3 CurrentVelocity { get; set; } = Vector3.zero;
 
-
-    private readonly FiniteStateMachine _fsm = new();
     public FiniteStateMachine FSM => _fsm;
 
     public IdleState Idle { get; private set; }
     public PatrolState Patrol { get; private set; }
     public AttackState Attack { get; private set; }
     public GatherState Gather { get; private set; }
+    #endregion
 
+    #region Unity Callbacks
     private void Start()
     {
         Idle = new(this);
@@ -65,5 +78,15 @@ public class FSMAgent : MonoBehaviour
             GizmosUtils.DrawGizmosCircle(pos, Vector3.up, _patrolData.detectionRadius);
         }
     }
+    #endregion
 
+    #region Public Methods
+    public void UpdateStateText(string newStateName)
+    {
+        if (_stateText != null)
+        {
+            _stateText.text = newStateName;
+        }
+    }
+    #endregion
 }

@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class Ball : MonoBehaviour
 {
+    #region Events
     public event Action<Ball> OnDestroyed;
+    #endregion
+
+    #region Serialized Fields
     [SerializeField] private float _life = 1f;
     [SerializeField] private bool _drawGizmos = true;
     [SerializeField] private Color _gizmosColor = Color.pink;
@@ -13,10 +17,14 @@ public class Ball : MonoBehaviour
 
     [SerializeField] private Image _ballImage;
     [SerializeField] private Sprite[] _ballSprites;
+    #endregion
 
+    #region Private Fields
     private bool _isInvincible = false;
     private float _maxLife;
+    #endregion
 
+    #region Unity Callbacks
     private void Start()
     {
         _maxLife = _life;
@@ -29,6 +37,16 @@ public class Ball : MonoBehaviour
         OnDestroyed?.Invoke(this);
     }
 
+    private void OnDrawGizmos()
+    {
+        if (!_drawGizmos) return;
+        Gizmos.color = _gizmosColor;
+        var pos = new Vector3(transform.position.x, 0f, transform.position.z);
+        GizmosUtils.DrawGizmosCircle(pos, Vector3.up, 1f);
+    }
+    #endregion
+
+    #region Public Methods
     public void TakeDamage(float amount)
     {
         if (_isInvincible) return;
@@ -48,19 +66,14 @@ public class Ball : MonoBehaviour
 
         StartCoroutine(InvincibilityTime());
     }
+    #endregion
 
+    #region Coroutines
     IEnumerator InvincibilityTime()
     {
         _isInvincible = true;
         yield return new WaitForSeconds(_invincibilityTime);
         _isInvincible = false;
     }
-
-    private void OnDrawGizmos()
-    {
-        if (!_drawGizmos) return;
-        Gizmos.color = _gizmosColor;
-        var pos = new Vector3(transform.position.x, 0f, transform.position.z);
-        GizmosUtils.DrawGizmosCircle(pos, Vector3.up, 1f);
-    }
+    #endregion
 }

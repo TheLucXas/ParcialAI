@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour
 {
+    #region Enums
     private enum SteeringModes { Seek, Flee, Arrive, Pursuit, Evade, Flocking }
+    #endregion
 
+    #region Serialized Fields
     [Header("Stats")]
     [SerializeField] private float _maxHealth = 2.0f;
     [SerializeField] private float _attackDamage = 0.25f;
     [SerializeField] private float _attackCooldown = 0.5f;
     [SerializeField] private float _respawnTime = 6.0f;
-    private float _currentHealth;
-    private bool _isDead = false;
     [SerializeField]
     private float _maxSpeed = 5f;
     [SerializeField]
@@ -24,7 +25,6 @@ public class Agent : MonoBehaviour
     private SteeringModes _currentMode;
     [SerializeField]
     private float _arriveRadius = 3f;
-    private LayerMask _originalMask;
     [SerializeField] private Color _gizmosFlockingColor = Color.purple;
     [SerializeField] private LayerMask _rewardLayer;
     [SerializeField] private LayerMask _hunterLayer;
@@ -43,29 +43,34 @@ public class Agent : MonoBehaviour
     [SerializeField, Range(0f, 3f)]
     private float _alignmentWeight = 1f;
 
-    [Header("References")]
-    [SerializeField]
-    private Transform target;
-    [SerializeField]
-    private Agent targetAgent;
+    [Header("Visual Feedback")]
+    [SerializeField] private Sprite[] _agentSprites;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private TextMeshProUGUI _textMeshPro;
+    #endregion
+
+    #region Private Fields
+    private float _currentHealth;
+    private bool _isDead = false;
 
     private static readonly List<Agent> _allAgents = new();
     private readonly Collider[] _detectionBuffer = new Collider[1];
     private readonly Collider[] _hunterBuffer = new Collider[1];
 
-    [Header("Visual Feedback")]
-    [SerializeField] private Sprite[] _agentSprites;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private TextMeshPro _textMeshPro;
     private Color _originalColor;
     private Coroutine _damageFlashCoroutine;
 
     private float _timer;
     private Vector3 _velocity;
+    private int _originalLayer;
+    #endregion
+
+    #region Properties
     public Vector3 Velocity => _velocity;
     public bool IsDead => _isDead;
-    private int _originalLayer;
+    #endregion
 
+    #region Unity Callbacks
     private void Awake()
     {
         _allAgents.Add(this);
@@ -148,6 +153,26 @@ public class Agent : MonoBehaviour
         transform.position = Bounds.Instance.CalculateBoundPosition(transform.position);
     }
 
+    private void OnDestroy()
+    {
+        _allAgents.Remove(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_isDead) return;
+
+        Vector3 pos2D = new Vector3(transform.position.x, 0f, transform.position.z);
+
+        Gizmos.color = Color.white;
+        GizmosUtils.DrawGizmosCircle(pos2D, Vector3.up, _viewRadius);
+
+        Gizmos.color = _gizmosFlockingColor;
+        GizmosUtils.DrawGizmosCircle(pos2D, Vector3.up, _separationRadius);
+    }
+    #endregion
+
+    #region Public Methods
     public void TakeDamage(float amount)
     {
         if (_isDead) return;
@@ -179,6 +204,30 @@ public class Agent : MonoBehaviour
         StartCoroutine(WaitToRespawn());
     }
 
+    public void Respawn()
+    {
+        transform.position = Bounds.Instance.GetRandomPointInBounds();
+        _currentHealth = _maxHealth;
+        _isDead = false;
+
+        if (_textMeshPro != null) _textMeshPro.text = "Flocking";
+
+        if (_spriteRenderer != null) _spriteRenderer.color = _originalColor;
+
+        AgentVisibility(true);
+    }
+
+    public void AgentVisibility(bool visible)
+    {
+        gameObject.layer = visible ? _originalLayer : 0;
+
+        if (_spriteRenderer != null) _spriteRenderer.enabled = visible;
+
+        if (_textMeshPro != null) _textMeshPro.text = "";
+    }
+    #endregion
+
+    #region Coroutines
     private IEnumerator WaitToRespawn()
     {
         yield return new WaitForSeconds(_respawnTime);
@@ -204,28 +253,7 @@ public class Agent : MonoBehaviour
 
         if (!_isDead) _spriteRenderer.color = _originalColor;
     }
-
-    public void Respawn()
-    {
-        transform.position = Bounds.Instance.GetRandomPointInBounds();
-        _currentHealth = _maxHealth;
-        _isDead = false;
-
-        if (_textMeshPro != null) _textMeshPro.text = "Flocking";
-
-        if (_spriteRenderer != null) _spriteRenderer.color = _originalColor;
-
-        AgentVisibility(true);
-    }
-
-    public void AgentVisibility(bool visible)
-    {
-        gameObject.layer = visible ? _originalLayer : 0;
-
-        if (_spriteRenderer != null) _spriteRenderer.enabled = visible;
-
-        if (_textMeshPro != null) _textMeshPro.text = "";
-    }
+    #endregion
 
     #region Steering Behaviors
 
@@ -325,22 +353,4 @@ public class Agent : MonoBehaviour
         SteeringUtils.CalculateArrive(transform.position, _velocity, targetPosition, _maxSpeed, _maxForce, _arriveRadius);
 
     #endregion
-
-    private void OnDestroy()
-    {
-        _allAgents.Remove(this);
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (_isDead) return;
-
-        Vector3 pos2D = new Vector3(transform.position.x, 0f, transform.position.z);
-
-        Gizmos.color = Color.white;
-        GizmosUtils.DrawGizmosCircle(pos2D, Vector3.up, _viewRadius);
-
-        Gizmos.color = _gizmosFlockingColor;
-        GizmosUtils.DrawGizmosCircle(pos2D, Vector3.up, _separationRadius);
-    }
 }

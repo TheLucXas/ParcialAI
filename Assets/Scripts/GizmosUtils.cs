@@ -2,6 +2,7 @@ using UnityEngine;
 
 public static class GizmosUtils
 {
+    #region Public Methods
     public static void DrawGizmosCircle(Vector3 pos, Vector3 normal, float radius, int numSegments = 32)
     {
         Vector3 temp = (normal.x < normal.z) ? new Vector3(1f, 0f, 0f) : new Vector3(0f, 0f, 1f);
@@ -22,4 +23,5 @@ public static class GizmosUtils
             prevPt = nextPt;
         }
     }
+    #endregion
 }

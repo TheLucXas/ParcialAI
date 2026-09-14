@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class FiniteStateMachine
 {
+    #region Private Fields
     private State _currentState;
 
     private HashSet<State> _allStates = new();
+    #endregion
 
+    #region Public Methods
     public void AddState(State state)
     {
         if (!_allStates.Contains(state))
@@ -30,5 +33,5 @@ public class FiniteStateMachine
     {
         if (_currentState != null) _currentState.Update();
     }
-
+    #endregion
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public static class SteeringUtils
 {
+    #region Public Methods
     public static Vector3 CalculateSeek(Vector3 currentPosition, Vector3 velocity, Vector3 targetPosition, float maxSpeed, float maxForce)
     {
         Vector3 desired = (targetPosition - currentPosition).normalized * maxSpeed;
@@ -54,4 +55,5 @@ public static class SteeringUtils
         steering = Vector3.ClampMagnitude(steering, maxForce);
         return steering * Time.deltaTime;
     }
+    #endregion
 }

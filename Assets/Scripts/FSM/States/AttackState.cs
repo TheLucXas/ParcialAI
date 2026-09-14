@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttackState : State
 {
+    #region Private Fields
     private AttackData _data;
     private FSMAgent _agent;
 
@@ -11,17 +12,24 @@ public class AttackState : State
     private Agent _targetAgent;
 
     private float _rangedWaitTimer = 0f;
+    #endregion
 
-    public void SetTarget(Transform target) => _target = target;
-
+    #region Constructor
     public AttackState(AttackData data, FSMAgent agent)
     {
         _data = data;
         _agent = agent;
     }
+    #endregion
 
+    #region Public Methods
+    public void SetTarget(Transform target) => _target = target;
+    #endregion
+
+    #region State Overrides
     public override void Enter()
     {
+        _agent.UpdateStateText("Attack");
         if (_target != null) _targetAgent = _target.GetComponentInParent<Agent>();
 
         _rangedWaitTimer = 0f;
@@ -88,6 +96,14 @@ public class AttackState : State
         }
     }
 
+    public override void Exit()
+    {
+        _target = null;
+        _targetAgent = null;
+    }
+    #endregion
+
+    #region Private Methods
     private void ShootCard(float damage, bool isMelee)
     {
         if (_data.ProjectilePrefab != null)
@@ -98,25 +114,27 @@ public class AttackState : State
             newProjectile.Initialize(_targetAgent, damage, isMelee, _data.MeleeAttackRadius);
         }
     }
-
-    public override void Exit()
-    {
-        _target = null;
-        _targetAgent = null;
-    }
+    #endregion
 }
 
 [System.Serializable]
 public class AttackData
 {
+    [Header("Damage")]
     public float AttackDamage = 1f;
+
+    [Header("Radii")]
     public float MeleeAttackRadius = 3f;
     public float RangeAttackRadius = 6f;
+
+    [Header("Timing")]
     public float TimeBetweenAttacks = 5f;
+    public float RangedAttackDelay = 1.5f;
+
+    [Header("Chase")]
     public float ChaseSpeed = 14f;
     public float ChaseForce = 14f;
 
-    public float RangedAttackDelay = 1.5f;
-
+    [Header("Projectile")]
     public Projectile ProjectilePrefab;
 }
